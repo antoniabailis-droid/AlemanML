@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101b2b">
+  <meta name="description" content="Aleman ML - Aprende alemán hablando, con las manos libres.">
+  <title>Aleman ML</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-symbol">ML</div>
+        <div>
+          <div class="brand-name">ALEMAN <span>ML</span></div>
+          <div class="brand-subtitle">Aprende hablando</div>
+        </div>
+      </div>
+
+      <button class="icon-button" id="homeButton" aria-label="Inicio">
+        <span>⌂</span>
+      </button>
+    </header>
+
+    <main>
+
+      <!-- INICIO -->
+      <section id="homeScreen" class="screen active">
+        <div class="welcome">
+          <div class="eyebrow">TU ENTRENAMIENTO DE ALEMÁN</div>
+          <h1>Menos pantalla.<br><span>Más conversación.</span></h1>
+          <p>Escucha, responde y aprende. Aleman ML te acompaña paso a paso.</p>
+        </div>
+
+        <div class="continue-card">
+          <div class="continue-info">
+            <span class="section-kicker">TU APRENDIZAJE</span>
+            <h2 id="lastBlockTitle">Todavía no has comenzado</h2>
+            <p id="lastBlockDescription">Elige un bloque para empezar a practicar.</p>
+          </div>
+          <button id="continueButton" class="primary-button">
+            Continuar <span>→</span>
+          </button>
+        </div>
+
+        <div class="home-actions">
+          <button class="action-card" id="chooseBlockButton">
+            <span class="action-icon">▦</span>
+            <span class="action-title">Elegir bloque</span>
+            <span class="action-description">Accede libremente a los 25 bloques</span>
+            <span class="action-arrow">→</span>
+          </button>
+
+          <button class="action-card" id="reviewButton">
+            <span class="action-icon">↻</span>
+            <span class="action-title">Repasar</span>
+            <span class="action-description">Vuelve a practicar lo aprendido</span>
+            <span class="action-arrow">→</span>
+          </button>
+        </div>
+
+        <div class="progress-panel">
+          <div class="progress-heading">
+            <span>Tu recorrido</span>
+            <strong id="overallProgress">0 de 25 bloques</strong>
+          </div>
+          <div class="progress-track">
+            <div id="overallProgressBar" class="progress-fill"></div>
+          </div>
+          <p>Tu progreso se guarda en este dispositivo.</p>
+        </div>
+      </section>
+
+      <!-- SELECCIÓN DE BLOQUES -->
+      <section id="blocksScreen" class="screen">
+        <div class="screen-heading">
+          <button class="back-button" data-go="homeScreen">← Volver</button>
+          <div class="eyebrow">TU RECORRIDO</div>
+          <h1>Elige tu <span>bloque</span></h1>
+          <p>Puedes comenzar por cualquiera. No necesitas completar los anteriores.</p>
+        </div>
+
+        <div class="block-summary">
+          <span>25 bloques disponibles</span>
+          <span id="blockCount">0 completados</span>
+        </div>
+
+        <div id="blocksGrid" class="blocks-grid"></div>
+      </section>
+
+      <!-- PRÁCTICA -->
+      <section id="practiceScreen" class="screen">
+        <div class="practice-top">
+          <button class="back-button" id="leavePracticeButton">← Bloques</button>
+          <div class="practice-block-label" id="practiceBlockLabel">BLOQUE 1</div>
+        </div>
+
+        <div class="practice-heading">
+          <div class="eyebrow">ESCUCHA Y RESPONDE</div>
+          <h1 id="practiceBlockTitle">Números cardinales</h1>
+          <div class="card-position">
+            <span id="cardPosition">Tarjeta 1 de 10</span>
+            <span id="correctCount">0 / 5 repeticiones</span>
+          </div>
+        </div>
+
+        <div class="learning-card">
+          <div class="card-label">DI EN ALEMÁN</div>
+          <div id="spanishPrompt" class="spanish-prompt">Cero, uno, dos</div>
+
+          <div class="answer-divider"></div>
+
+          <div class="card-label">ALEMÁN</div>
+          <div id="germanAnswer" class="german-answer">Null, eins, zwei</div>
+
+          <div id="phoneticGuide" class="phonetic-guide"></div>
+
+          <div id="verbReference" class="verb-reference"></div>
+        </div>
+
+        <div class="voice-status" id="voiceStatus" aria-live="polite">
+          <span class="status-dot"></span>
+          <span id="voiceStatusText">Preparado para practicar</span>
+        </div>
+
+        <div class="heard-panel" id="heardPanel">
+          <span class="card-label">TE HE ENTENDIDO</span>
+          <p id="heardText">Tu respuesta aparecerá aquí.</p>
+        </div>
+
+        <div class="practice-controls">
+          <button id="listenButton" class="secondary-button">
+            <span>🔊</span> Escuchar
+          </button>
+          <button id="repeatButton" class="secondary-button">
+            <span>↻</span> Repite
+          </button>
+        </div>
+
+        <div class="main-voice-controls">
+          <button id="readyButton" class="ready-button">
+            <span class="ready-icon">▶</span>
+            <span>READY</span>
+            <small>Comenzar práctica por voz</small>
+          </button>
+
+          <button id="stopButton" class="stop-button" disabled>
+            ■ STOP
+          </button>
+        </div>
+
+        <div class="practice-footer">
+          <span>Necesitas 5 respuestas correctas</span>
+          <span>Sin temporizador</span>
+        </div>
+      </section>
+
+      <!-- REPASO -->
+      <section id="reviewScreen" class="screen">
+        <div class="screen-heading">
+          <button class="back-button" data-go="homeScreen">← Volver</button>
+          <div class="eyebrow">REFUERZA LO APRENDIDO</div>
+          <h1>Modo <span>repaso</span></h1>
+          <p>Selecciona un bloque completado para volver a practicarlo.</p>
+        </div>
+        <div id="reviewBlocks" class="blocks-grid"></div>
+      </section>
+
+    </main>
+
+    <footer class="app-footer">
+      <span>ALEMAN ML</span>
+      <span>Aprender · Escuchar · Hablar</span>
+    </footer>
+  </div>
+
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
