@@ -298,8 +298,8 @@
       voiceStatus.textContent = "Pulsa READY para comenzar";
     }
 
+   
     correctCount = 0;
-    isPracticing = false;
   }
 
   // ---------------------------------------------------------
